@@ -1,0 +1,12 @@
+<div>
+    <h3>Recent messages</h3>
+
+    {% for message in user_messages %}
+    <div>
+        <h5>{{message.user.username}}</h5> commented
+        <small>{{message.created|timesince}} ago</small>
+
+        <p>{{message.body|safe}}</p>
+    </div>
+    {% endfor %}
+</div>

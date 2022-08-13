@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div calss="custom-container">
+    <!-- Authors section -->
+    {% include 'base/authors_section.html' %}
+    <!-- End -->
+
+    <!-- Author's Information -->
+    <div>
+        <h2>{{author.Name}}</h2>
+        <img width="350px" height="350px" src="{{author.picture.url}}" />
+
+        <p>{{author.bio|safe}}</p>
+
+    </div>
+    <!-- End -->
+
+    <!-- Activity section -->
+    {% include 'base/recent_activity_section.html' %}
+    <!-- End -->
+</div>
+
+{% endblock %}

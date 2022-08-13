@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="custom-container">
+    <!-- Authors section -->
+    {% include 'base/authors_section.html' %}
+    <!-- End -->
+
+    <!-- Tales section -->
+    <div>
+        <h1>Fairy Tales</h1>
+        {% for tale in tales %}
+        <div>
+            <a href="{% url 'tale' tale.id %}"><h4>{{tale.title}}</h4></a>
+            <a href="{% url 'author-profile' tale.author.id%}"><h5>{{tale.author.name}}</h5></a>
+            <img src="{{tale.cover.url}}" />
+        </div>
+        {% endfor %}
+    </div>
+    <!-- End -->
+
+    <!-- Activity section -->
+    {% include 'base/recent_activity_section.html' %}
+    <!-- End -->
+</div>
+{% endblock %}

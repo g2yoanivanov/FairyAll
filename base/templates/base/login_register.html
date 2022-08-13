@@ -1,0 +1,40 @@
+{% extends 'main.html' %}
+
+{% block content %}
+{% if page == 'login' %}
+
+<div>
+    <form method="POST" action="">
+        {% csrf_token %}
+
+        <label>Email:</label>
+        <input name="email" type="email" placeholder="Пример: example@abv.bg" />
+
+        <label>Парола:</label>
+        <input name="password" type="password" />
+
+        <button type="submit">Влез</button>
+    </form>
+
+    <p>Нямате профил?</p>
+    <a href="{% url 'register' %}">Регистрация</a>
+</div>
+
+{% else %}
+<form class="form" action="" method="POST">
+    {% csrf_token %}
+
+    {% for field in form %}
+    <div>
+        <label>{{field.label}}</label>
+        {{field}}
+    </div>
+    {% endfor %}
+
+    <button type="submit">Регистрирай се</button>
+</form>
+
+<p>Вече имате профил?</p>
+<a href="{% url 'login' %}">Влезте в него</a>
+{% endif %}
+{% endblock %}

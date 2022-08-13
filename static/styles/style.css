@@ -1,0 +1,16 @@
+:root {
+  --grey-color: #5b8291;
+  --white-color: #eaebed;
+  --blue-color: #244d61;
+  --cyan-color: #98dad9;
+}
+
+
+.custom-container {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  text-decoration: none;
+  background-color: var(--grey-color);
+  color: var(--white-color);
+  text-decoration: none;
+}

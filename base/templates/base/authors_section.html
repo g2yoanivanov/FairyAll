@@ -1,0 +1,9 @@
+<div>
+    <h3>Authors</h3>
+    <h4><a href="{% url 'home' %}">All</a>   <span>{{authors.count}}</span></h4>
+    {% for a in authors %}
+    <h4><a href="{% url 'author-profile' a.id %}">{{a.name}}</a>   <span>{{a.tale_set.all.count}}</span></h4>
+    {% endfor %}
+
+    <a href="#">ОЩЕ</a>
+</div>

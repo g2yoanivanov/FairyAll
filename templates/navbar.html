@@ -1,0 +1,25 @@
+{% load static %}
+
+<header>
+    <nav class="navbar bg-дарк">
+        <div class="container-fluid">
+            <form class="d-flex" role="search" method="GET" action="{% url 'home' %}">
+                <input class="form-control me-3" name="q" type="search" placeholder="Търсете приказки">
+                <button class="btn btn-outline-primary" type="submit">Търси</button>
+            </form>
+            <a href="{% url 'home' %}" class="navbar-brand">FairyAll</a>
+
+
+            {% if request.user.is_authenticated %}
+            <div class="d-grid text-center">
+                <small>Hello {{request.user.username}}</small>
+                <a href="{% url 'logout' %}"><small>Logout</small></a>
+            </div>
+            {% else %}
+
+            <a href="{% url 'login' %}">Login</a>
+
+            {% endif %}
+        </div>
+    </nav>
+</header>
