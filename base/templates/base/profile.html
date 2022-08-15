@@ -1,24 +1,27 @@
 {% extends 'main.html' %}
 
 {% block content %}
-
 <div class="triple-container">
     <!-- Authors section -->
     {% include 'base/authors_section.html' %}
     <!-- End -->
 
-    <!-- Author's Information -->
+    <!-- User's Information -->
     <div>
-        <h2>{{author.name}}</h2>
-        <img width="350px" height="350px" src="{{author.picture.url}}" />
+        <h2>{{user.name}}</h2>
+        <img width="350px" height="350px" src="{{user.picture.url}}" />
 
-        <p>{{author.bio|safe}}</p>
+        {% if user.is_staff %}
+        <p>Staff member</p>
+        {% endif %}
+
+        <p>{{user.bio|safe}}</p>
 
     </div>
     <!-- End -->
+
     <!-- Activity section -->
     {% include 'base/recent_activity_section.html' %}
     <!-- End -->
 </div>
-
 {% endblock %}

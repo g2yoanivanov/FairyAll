@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div>
+            <p>Сигурни ли сте, че искате да изтриете "{{obj}}"?</p>
+        </div>
+    
+        <div>
+            <input type="submit" value="Потвърди" />
+        </div>
+    
+    </form>
+</div>
+{% endblock %}

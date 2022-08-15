@@ -1,9 +1,26 @@
-<div>
-    <h3>Authors</h3>
-    <h4><a href="{% url 'home' %}">All</a>   <span>{{authors.count}}</span></h4>
-    {% for a in authors %}
-    <h4><a href="{% url 'author-profile' a.id %}">{{a.name}}</a>   <span>{{a.tale_set.all.count}}</span></h4>
-    {% endfor %}
+<div class="text-center mx-2 border-blue rounded">
+    <div class="bg-blue p-2 radius-5 mb-3">
+        <h2>Автори</h2>
+    </div>
+    <div>
+        {% for a in authors %}
+        <div class="row align-items-center pb-3">
+            <div class="col-8">
+                <h3>
+                    <a class="link-blue text-blue text-decoration-none" href="{% url 'author-profile' a.id %}">
+                        {{a.name}}
+                    </a>
+                </h3>
+            </div>
 
-    <a href="#">ОЩЕ</a>
+            <div class="col-3 mx-2">
+                <h4 class="text-center radius-5 bg-blue text-cyan">
+                    {{a.tale_set.all.count}}
+                </h4>
+            </div>
+        </div>
+        {% endfor %}
+
+        <a class="link-blue text-blue text-decoration-underlined" href="">ОЩЕ</a>
+    </div>
 </div>

@@ -40,7 +40,11 @@ class Tale(models.Model):
     title = models.CharField(max_length=128)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     body = RichTextField()
-    cover = models.ImageField(null=True, default='cover.svg')
+    cover = models.ImageField(null=True, default='cover.jpg')
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['author', '-created']
 
     def __str__(self):
         return self.title

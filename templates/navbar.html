@@ -1,25 +1,85 @@
 {% load static %}
 
-<header>
-    <nav class="navbar bg-дарк">
+<header class="mb-4">
+    <!-- Navbar for computers -->
+    <nav class="navbar bg-dark text-light d-md-none d-lg-block d-sm-none d-md-block d-none d-sm-block">
         <div class="container-fluid">
             <form class="d-flex" role="search" method="GET" action="{% url 'home' %}">
                 <input class="form-control me-3" name="q" type="search" placeholder="Търсете приказки">
-                <button class="btn btn-outline-primary" type="submit">Търси</button>
+                <button class="btn btn-outline-cyan" type="submit">Търси</button>
             </form>
-            <a href="{% url 'home' %}" class="navbar-brand">FairyAll</a>
-
+            <a href="{% url 'home' %}" class="navbar-brand title text-cyan">FairyAll - приказки за всички</a>
 
             {% if request.user.is_authenticated %}
-            <div class="d-grid text-center">
-                <small>Hello {{request.user.username}}</small>
-                <a href="{% url 'logout' %}"><small>Logout</small></a>
+            <div class="text-center d-flex align-items-center">
+                <div>
+                    <img class="profile-pic" width="50px" height="50px" src="{{request.user.picture.url}}" />
+                </div>
+
+                <div class="mx-2">
+                    <p class="text-cyan text-decoration-none">
+                        {{request.user.name}}
+                        <br>
+                        <span>
+                            <a class="text-decoration-none link-grey text-grey"
+                                href="{% url 'user-profile' request.user.id %}">
+                                @{{request.user.username}}
+                            </a>
+                        </span>
+                    </p>
+                </div>
+
+                <div class="dropdown">
+                    <button class="btn btn-no-border btn-sm" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                            viewBox="0 0 32 32">
+                            <title></title>
+                            <path d="M16 21l-13-13h-3l16 16 16-16h-3l-13 13z"></path>
+                        </svg>
+                    </button>
+                    <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item text-cyan" href="{% url 'update-user' %}">Редактиране на профил</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-cyan" href="{% url 'logout' %}">Излезте от профила си</a>
+                    </div>
+                </div>
             </div>
             {% else %}
-
-            <a href="{% url 'login' %}">Login</a>
-
+            <a class="text-decoration-none text-cyan link-cyan" href="{% url 'login' %}">Влезте в профила си</a>
             {% endif %}
+        </div>
+    </nav>
+
+    <!-- Navbar for tablets and smartphones -->
+    <nav class="navbar bg-dark text-light d-lg-none d-xl-block d-xl-none">
+        <div class="container-fluid">
+            <a class="navbar-brand title text-cyan" href="{% url 'home' %}" class="navbar-brand text-light">FairyAll</a>
+
+            {% if request.user.is_authenticated %}
+            <span>
+                <a class="text-decoration-none link-grey text-grey" href="{% url 'user-profile' request.user.id %}">
+                    @{{request.user.username}}
+                </a>
+            </span>
+            <div class="dropdown">
+                <button class="btn btn-no-border btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                        <title></title>
+                        <path d="M16 21l-13-13h-3l16 16 16-16h-3l-13 13z"></path>
+                    </svg>
+                </button>
+                <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item text-cyan" href="{% url 'update-user' %}">Редактиране на профил</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item text-cyan" href="{% url 'logout' %}">Излезте от профила си</a>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <a class="text-decoration-none text-cyan link-cyan" href="{% url 'login' %}">Влезте в профила си</a>
+        {% endif %}
         </div>
     </nav>
 </header>

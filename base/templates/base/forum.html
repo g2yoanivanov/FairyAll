@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+
+{% block content %}
+{% for message in user_messages %}
+<div>
+    <h4>{{message.user.username}} commented</h4>
+    <small>{{message.created|timesince}}</small>
+
+    {% if request.user == message.user %}
+    <a href="{% url 'delete-message' message.id %}">Delete</a>
+    {% endif %}
+
+    <p>{{message.body|safe}}</p>
+</div>
+{% endfor %}
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <input name="body" placeholder="Write your message here..." />
+</form>
+{% endblock %}

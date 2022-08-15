@@ -1,12 +1,26 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<div>
-    <h2>{{tale.title}}</h2>
-    <h3>{{tale.author.name}}</h3>
+<div class="double-container">
+    <div>
+        <h2>{{tale.title}}</h2>
+        <h3>{{tale.author.name}}</h3>
 
-    <img src="{{tale.cover.url}}">
+        <img src="{{tale.cover.url}}">
 
-    <p>{{tale.body|safe}}</p>
+        <div>
+            <p>{{tale.body|safe}}</p>
+        </div> 
+    </div>
+
+    <div>
+        <h3>Още от {{tale.author.name}}</h3>
+        {% for t in tales %}
+            {% if t.author.name == tale.author.name and tale.title != t.title %}
+            <h4>{{t.title}}</h4>
+            <img src="{{t.cover.url}}" />
+            {% endif %}
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

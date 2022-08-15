@@ -1,21 +1,38 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<div class="custom-container">
+<div class="triple-container">
     <!-- Authors section -->
     {% include 'base/authors_section.html' %}
     <!-- End -->
 
     <!-- Tales section -->
     <div>
+        {% if request.user.is_staff %}
+        <div>
+            <a href="{% url 'create-tale' %}"><button>Добави приказка</button></a>
+            <a href="{% url 'create-author' %}"><button>Добави автор</button></a>
+        </div>
+        {% endif %}
+
         <h1>Fairy Tales</h1>
         {% for tale in tales %}
         <div>
-            <a href="{% url 'tale' tale.id %}"><h4>{{tale.title}}</h4></a>
-            <a href="{% url 'author-profile' tale.author.id%}"><h5>{{tale.author.name}}</h5></a>
+            <a href="{% url 'tale' tale.id %}">
+                <h4>{{tale.title}}</h4><a href="{% url 'delete-tale' tale.id%}">Delete</a>
+            </a>
+            <a href="{% url 'author-profile' tale.author.id%}">
+                <h5>{{tale.author.name}}</h5>
+            </a>
             <img src="{{tale.cover.url}}" />
         </div>
         {% endfor %}
+
+        <!-- TODO: 
+        <div>
+            <a href=""><button>Разгледай всички приказки</button></a>
+        </div>
+        -->
     </div>
     <!-- End -->
 

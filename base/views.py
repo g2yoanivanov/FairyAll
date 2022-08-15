@@ -1,11 +1,12 @@
-import re
+from email import contentmanager, message
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
-from .forms import MyUserCreationForm
+from .forms import MyUserCreationForm, AuthorForm, TaleForm, UserForm
 from .models import User, Country, Author, Tale, Message
 
 
@@ -47,7 +48,7 @@ def register_page(request):
 
     if request.method == 'POST':
         form = MyUserCreationForm(request.POST)
-        
+
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
@@ -94,6 +95,162 @@ def author_profile(request, pk):
 
 def tale(request, pk):
     tale = Tale.objects.get(id=pk)
+    tales = Tale.objects.all()[0:7]
 
-    context = {'tale': tale}
+    context = {'tale': tale, 'tales': tales}
     return render(request, 'base/tale.html', context)
+
+
+def user_profile(request, pk):
+    user = User.objects.get(id=pk)
+    user_messages = user.message_set.all()
+    authors = Author.objects.all()
+
+    context = {'user': user, 'user_messages': user_messages, 'authors': authors}
+    return render(request, 'base/profile.html', context)
+
+
+@login_required(login_url='login')
+def update_user(request):
+    user = request.user
+    form = UserForm(instance=user)
+
+    if request.method == 'POST':
+        form = UserForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('user-profile', pk=user.id)
+
+    return render(request, 'base/creation-form.html', {'form': form})
+
+
+@login_required(login_url='login')
+def forum(request):
+    user_messages = Message.objects.all()
+
+    if request.method == 'POST':
+        message = Message.objects.create(
+            user=request.user,
+            body=request.POST.get('body')
+        )
+        return redirect('forum')
+
+    context = {'user_messages': user_messages}
+    return render(request, 'base/forum.html', context)
+
+
+@login_required(login_url='login')
+def delete_message(request, pk):
+    message = Message.objects.get(id=pk)
+
+    if request.user != message.user:
+        return HttpResponse('Нямате достъп до тази страница')
+
+    if request.method == 'POST':
+        message.delete()
+        return redirect('forum')
+    return render(request, 'base/delete.html', {'obj': message})
+
+
+# TODO: add a view for a staff members page
+
+@staff_member_required
+def create_tale(request):
+    form = TaleForm()
+
+    if request.method == 'POST':
+        form = TaleForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            # TODO: redirect to a page for the staff members
+            return redirect('home')
+        else:
+            messages.error(request, 'Неуспешно създаване на приказка')
+
+    context = {'form': form}
+    return render(request, 'base/creation-form.html', context)
+
+
+@staff_member_required
+def update_tale(request, pk):
+    tale = Tale.objects.get(id=pk)
+    form = TaleForm(instance=tale)
+
+    if not request.user.is_staff:
+        return HttpResponse('Нямате достъп до тази страница!')
+
+    if request.method == 'POST':
+        form = TaleForm(request.POST, request.FILES, instance=tale)
+        if form.is_valid():
+            form.save()
+            # TODO: redirect to a page for the staff members
+            return redirect('home')
+
+    context = {'form': form}
+    return render(request, 'base/creation-form.html', context)
+
+
+@staff_member_required
+def delete_tale(request, pk):
+    tale = Tale.objects.get(id=pk)
+
+    if not request.user.is_staff:
+        return HttpResponse('Нямате достъп до тази страница!')
+
+    if request.method == 'POST':
+        tale.delete()
+        return redirect('home')
+    
+    context = {'obj': tale}
+    return render(request, 'base/delete.html', context)
+
+
+@staff_member_required
+def create_author(request):
+    form = AuthorForm()
+
+    if request.method == 'POST':
+        form = AuthorForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            # TODO: redirect to a page for the staff members
+            return redirect('home')
+        else:
+            messages.error(request, 'Неуспешно създаване на автор')
+
+    context = {'form': form}
+    return render(request, 'base/creation-form.html', context)
+
+
+@staff_member_required
+def update_author(request, pk):
+    author = Author.objects.get(id=pk)
+    form = AuthorForm(instance=author)
+
+    if not request.user.is_staff:
+        return HttpResponse('Нямате достъп до тази страница!')
+
+    if request.method == 'POST':
+        form = AuthorForm(request.POST, request.FILES, instance=tale)
+        if form.is_valid():
+            form.save()
+            # TODO: redirect to a page for the staff members
+            return redirect('home')
+
+    context = {'form': form}
+    return render(request, 'base/author-form.html', context)
+
+
+@staff_member_required
+def delete_author(request, pk):
+    author = Author.objects.get(id=pk)
+
+    if not request.user.is_staff:
+        return HttpResponse('Нямате достъп до тази страница!')
+
+    if request.method == 'POST':
+        author.delete()
+        return redirect('home')
+    
+    context = {'obj': author}
+    return render(request, 'base/delete.html', context)
