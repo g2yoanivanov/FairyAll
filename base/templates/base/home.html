@@ -1,43 +1,61 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<div class="triple-container">
+<div class="d-flex row container-fluid mt-4 px-0 mx-0">
     <!-- Authors section -->
-    {% include 'base/authors_section.html' %}
+    <div class="col text-center rounded d-md-none d-lg-block d-sm-none d-md-block d-none d-sm-block">
+        {% include 'base/authors_section.html' %}
+    </div>
     <!-- End -->
 
     <!-- Tales section -->
-    <div>
-        {% if request.user.is_staff %}
+    <div class="text-center justify-content-center align-items-center col-lg-6">
         <div>
-            <a href="{% url 'create-tale' %}"><button>Добави приказка</button></a>
-            <a href="{% url 'create-author' %}"><button>Добави автор</button></a>
+            {% if request.user.is_staff %}
+            <a class="btn btn-blue m-2 text-cyan link-grey" href="{% url 'create-tale' %}">Добави приказка</a>
+            <a class="btn btn-blue m-2 text-cyan link-grey" href="{% url 'create-author' %}">Добави автор</a>
+            {% endif %}
+            <a class="btn btn-blue m-2 text-cyan link-grey" href="{% url 'create-author' %}">Всички приказки</a>
         </div>
-        {% endif %}
 
-        <h1>Fairy Tales</h1>
-        {% for tale in tales %}
-        <div>
-            <a href="{% url 'tale' tale.id %}">
-                <h4>{{tale.title}}</h4><a href="{% url 'delete-tale' tale.id%}">Delete</a>
-            </a>
-            <a href="{% url 'author-profile' tale.author.id%}">
-                <h5>{{tale.author.name}}</h5>
-            </a>
-            <img src="{{tale.cover.url}}" />
+        <div class="m-3 d-lg-none d-xl-block d-xl-none">
+            <form class="d-flex" role="search" method="GET" action="{% url 'home' %}">
+                <input class="form-control" name="q" type="search" placeholder="Търсете приказки">
+                <button class="btn btn-blue text-cyan" type="submit">Търси</button>
+            </form>
         </div>
-        {% endfor %}
 
-        <!-- TODO: 
         <div>
-            <a href=""><button>Разгледай всички приказки</button></a>
+            {% for tale in tales %}
+            <div class="card bg-blue mb-3 m-auto" style="max-width: 540px;">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="{{tale.cover.url}}" class="card-img">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="pt-2">
+                                <a class="text-decoration-none text-cyan link-grey" href="{% url 'tale' tale.id %}">
+                                    {{tale.title|title}}
+                                </a>
+                            </h5>
+                            <hr>
+                            <p class="card-text">{{tale.body|slice:"145"|safe}}...</p>
+                            <a class="text-decoration-none" href="{% url 'author-profile' tale.author.id %}"
+                                class="card-text"><small class="text-muted">{{tale.author.name}}</small></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
-        -->
     </div>
     <!-- End -->
 
     <!-- Activity section -->
-    {% include 'base/recent_activity_section.html' %}
+    <div class="col rounded d-md-none d-lg-block d-sm-none d-md-block d-none d-sm-block">
+        {% include 'base/recent_activity_section.html' %}
+    </div>
     <!-- End -->
 </div>
 {% endblock %}

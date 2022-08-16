@@ -1,13 +1,15 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<div class="triple-container">
+<div class="d-flex row container-fluid mt-4 px-0 mx-0">
     <!-- Authors section -->
-    {% include 'base/authors_section.html' %}
+    <div class="col text-center rounded d-md-none d-lg-block d-sm-none d-md-block d-none d-sm-block">
+        {% include 'base/authors_section.html' %}
+    </div>
     <!-- End -->
 
     <!-- User's Information -->
-    <div>
+    <div calss="text-center justify-content-center align-items-center col-lg-6">
         <h2>{{user.name}}</h2>
         <img width="350px" height="350px" src="{{user.picture.url}}" />
 
@@ -21,7 +23,9 @@
     <!-- End -->
 
     <!-- Activity section -->
-    {% include 'base/recent_activity_section.html' %}
+    <div class="col rounded d-md-none d-lg-block d-sm-none d-md-block d-none d-sm-block">
+        {% include 'base/recent_activity_section.html' %}
+    </div>
     <!-- End -->
 </div>
 {% endblock %}

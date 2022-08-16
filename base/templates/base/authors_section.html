@@ -1,26 +1,30 @@
-<div class="text-center mx-2 border-blue rounded">
-    <div class="bg-blue p-2 radius-5 mb-3">
-        <h2>Автори</h2>
-    </div>
-    <div>
-        {% for a in authors %}
-        <div class="row align-items-center pb-3">
-            <div class="col-8">
-                <h3>
-                    <a class="link-blue text-blue text-decoration-none" href="{% url 'author-profile' a.id %}">
-                        {{a.name}}
-                    </a>
-                </h3>
-            </div>
-
-            <div class="col-3 mx-2">
-                <h4 class="text-center radius-5 bg-blue text-cyan">
-                    {{a.tale_set.all.count}}
-                </h4>
-            </div>
+<div class="bg-blue p-2 border-rounded-top">
+    <h2>Автори</h2>
+    <p>приказки: <span>{{tales_count}}</span></p>
+</div>
+<div class="bg-grey py-3 border-rounded-bottom">
+    {% for a in authors %}
+    {% if a.name != "Български Народни Приказки" %}
+    <div class="row align-items-center justify-content-center text-left py-2">
+        <div class="col-8">
+            <h4>
+                <a class="text-blue link-cyan text-decoration-none" href="{% url 'author-profile' a.id %}">
+                    {{a.name}}
+                </a>
+            </h4>
         </div>
-        {% endfor %}
 
-        <a class="link-blue text-blue text-decoration-underlined" href="">ОЩЕ</a>
+        <div class="col-3 text-center mx-2">
+            <h4 class="border-radius-5 bg-blue text-cyan">
+                {{a.tale_set.all.count}}
+            </h4>
+        </div>
+    </div>
+    <hr>
+    {% endif %}
+    {% endfor %}
+
+    <div calss="text-center">
+        <a class="link-blue btn btn-cyan text-blue text-decoration-underlined" href="">ОЩЕ</a>
     </div>
 </div>

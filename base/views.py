@@ -70,13 +70,14 @@ def home(request):
 
     tales = Tale.objects.filter(
         Q(author__name__icontains=q) |
-        Q(title__icontains=q)
+        Q(title__icontains=q.lower())
     )[0:3]
 
     authors = Author.objects.all()[0:5]
     user_messages = Message.objects.all()[0:3]
 
-    tales_count = tales.count()
+    all_tales = Tale.objects.all()
+    tales_count = all_tales.count()
 
     context = {'tales': tales, 'authors': authors,
                'user_messages': user_messages, 'tales_count': tales_count}
@@ -88,8 +89,11 @@ def author_profile(request, pk):
     authors = Author.objects.all()[0:5]
     user_messages = Message.objects.all()[0:3]
 
+    all_tales = Tale.objects.all()
+    tales_count = all_tales.count()
+
     context = {'author': author, 'authors': authors,
-               'user_messages': user_messages}
+               'user_messages': user_messages, 'tales_count': tales_count}
     return render(request, 'base/author.html', context)
 
 
@@ -106,7 +110,10 @@ def user_profile(request, pk):
     user_messages = user.message_set.all()
     authors = Author.objects.all()
 
-    context = {'user': user, 'user_messages': user_messages, 'authors': authors}
+    all_tales = Tale.objects.all()
+    tales_count = all_tales.count()
+
+    context = {'user': user, 'user_messages': user_messages, 'authors': authors, 'tales_count': tales_count}
     return render(request, 'base/profile.html', context)
 
 
@@ -126,7 +133,7 @@ def update_user(request):
 
 @login_required(login_url='login')
 def forum(request):
-    user_messages = Message.objects.all()
+    user_messages = Message.objects.all()[0:100]
 
     if request.method == 'POST':
         message = Message.objects.create(
@@ -200,7 +207,7 @@ def delete_tale(request, pk):
     if request.method == 'POST':
         tale.delete()
         return redirect('home')
-    
+
     context = {'obj': tale}
     return render(request, 'base/delete.html', context)
 
@@ -251,6 +258,6 @@ def delete_author(request, pk):
     if request.method == 'POST':
         author.delete()
         return redirect('home')
-    
+
     context = {'obj': author}
     return render(request, 'base/delete.html', context)

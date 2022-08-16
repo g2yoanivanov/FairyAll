@@ -1,14 +1,30 @@
-<div>
-    <h3>Recent messages</h3>
-
+<div class="bg-blue text-center p-2 border-rounded-top">
+    <h2>Последни съобщения</h2>
+</div>
+<div class="bg-grey py-3 border-rounded-bottom">
     {% for message in user_messages %}
-    <div>
-        <h5>{{message.user.username}}</h5> commented
+    <div class="border-blue d-block rounded m-2 p-2">
+        <small>
+            <strong>
+                <a class="link-cyan text-decoration-none text-blue"
+                    href="{% url 'user-profile' message.user.id %}">@{{message.user.username}}
+                </a>
+            </strong>
+            коментира:
+        </small>
+        <br>
         <small>{{message.created|timesince}} ago</small>
-
-        <p>{{message.body|safe}}</p>
+        <br>
+        <p class="bg-blue rounded p-2 my-2">
+            <span>
+                {{message|safe|slice:"27"}}{% if message.body|length > 20 %}...{% endif %}
+            </span>
+        </p>
     </div>
     {% endfor %}
 
-    <a href="{% url 'forum' %}"><button>ФОРУМ</button></a>
+    <div class="text-center">
+        <a class="link-blue btn btn-cyan text-blue text-decoration-underlined" href="{% url 'forum' %}">ФОРУМ</a>
+    </div>
+
 </div>
