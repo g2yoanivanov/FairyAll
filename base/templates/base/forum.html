@@ -1,21 +1,64 @@
 {% extends 'main.html' %}
 
 {% block content %}
-{% for message in user_messages %}
-<div>
-    <h4>{{message.user.username}} commented</h4>
-    <small>{{message.created|timesince}}</small>
+<div class="container d-grid mt-4 justify-content-center align-items-center">
+    <div class="text-center mx-2">
+        <h2 class="text-blue">ФОРУМ</h2>
+        <h5 class="text-grey  mb-0">Споделете с останилите мнението си по различни въпроси</h5>
+        <small class="text-grey mt-0">(показват се последните 100 съобщения)</small>
+    </div>
 
-    {% if request.user == message.user %}
-    <a href="{% url 'delete-message' message.id %}">Delete</a>
-    {% endif %}
+    <div class="m-auto w-50 mt-5">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input class="form-control border-grey" name="body" placeholder="Вашият коментар..." />
+        </form>
+    </div>
 
-    <p>{{message.body|safe}}</p>
+    <div class="row justify-content-center align-items-center">
+        {% for message in user_messages %}
+        <div class="bg-grey border-blue col-6 col-lg-7 rounded m-2 p-2">
+
+            {% if request.user == message.user %}
+            <div class="position-relative">
+                <a href="{% url 'delete-message' message.id %}">
+                    <div class="text-right position-absolute top-0 end-0">
+                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                            viewBox="0 0 32 32">
+                            <title>remove</title>
+                            <path
+                                d="M27.314 6.019l-1.333-1.333-9.98 9.981-9.981-9.981-1.333 1.333 9.981 9.981-9.981 9.98 1.333 1.333 9.981-9.98 9.98 9.98 1.333-1.333-9.98-9.98 9.98-9.981z">
+                            </path>
+                        </svg>
+                    </div>
+                </a>
+            </div>
+            {% endif %}
+
+            <div class="d-flex">
+                <div>
+                    <img class="profile-pic d-block" width="40px" height="40px" src="{{request.user.picture.url}}" />
+                </div>
+                <div>
+                    <small>
+                        <strong>
+                            <a class="link-cyan text-decoration-none text-blue"
+                                href="{% url 'user-profile' message.user.id %}">@{{message.user.username}}
+                            </a>
+                        </strong>
+                        коментира:
+                    </small>
+                    <br>
+                    <small>{{message.created|timesince}} ago</small>
+                </div>
+            </div>
+            <br>
+            <p class="bg-blue text-left rounded p-2 my-1">
+                {{message.body|safe}}
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+
 </div>
-{% endfor %}
-
-<form action="" method="POST">
-    {% csrf_token %}
-    <input name="body" placeholder="Write your message here..." />
-</form>
 {% endblock %}

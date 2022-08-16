@@ -2,6 +2,9 @@
     <h2>Последни съобщения</h2>
 </div>
 <div class="bg-grey py-3 mb-2 rounded">
+    <div class="text-center">
+        <a class="link-blue btn btn-cyan text-blue text-decoration-underlined" href="{% url 'forum' %}">ФОРУМ</a>
+    </div>
     {% for message in user_messages %}
     <div class="border-blue d-block rounded m-2 p-2">
         <small>
@@ -22,9 +25,4 @@
         </p>
     </div>
     {% endfor %}
-
-    <div class="text-center">
-        <a class="link-blue btn btn-cyan text-blue text-decoration-underlined" href="{% url 'forum' %}">ФОРУМ</a>
-    </div>
-
 </div>
