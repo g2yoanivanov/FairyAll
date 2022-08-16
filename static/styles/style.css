@@ -28,18 +28,6 @@ svg{
   object-position: center;
 }
 
-.border-rounded-top{
-  border-bottom: 0;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px
-}
-
-.border-rounded-bottom{
-  border-top: 0;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px
-}
-
 .border-radius-5{
   border-radius: 5px;
 }

@@ -73,8 +73,8 @@ def home(request):
         Q(title__icontains=q.lower())
     )[0:3]
 
-    authors = Author.objects.all()[0:5]
-    user_messages = Message.objects.all()[0:3]
+    authors = Author.objects.all()[0:4]
+    user_messages = Message.objects.all()[0:7]
 
     all_tales = Tale.objects.all()
     tales_count = all_tales.count()
@@ -107,7 +107,7 @@ def tale(request, pk):
 
 def user_profile(request, pk):
     user = User.objects.get(id=pk)
-    user_messages = user.message_set.all()
+    user_messages = user.message_set.all()[0:3]
     authors = Author.objects.all()
 
     all_tales = Tale.objects.all()

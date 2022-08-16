@@ -3,20 +3,32 @@
 {% block content %}
 <div class="d-flex row container-fluid mt-4 px-0 mx-0">
     <!-- Authors section -->
-    <div class="col text-center rounded d-md-none d-lg-block d-sm-none d-md-block d-none d-sm-block">
+    <div class="col mx-2 bg-blue text-center rounded d-md-none d-lg-block d-sm-none d-md-block d-none d-sm-block">
         {% include 'base/authors_section.html' %}
+
+        <div class="bg-blue p-2 mt-2 border-rounded-top">
+            <h2>Цел на сайта</h2>
+        </div>
+        <div class="bg-grey rounded-top py-3 mb-2 rounded-bottom">
+            <p class="text-blue px-2">
+                Здравейте, дарги читатели! Добре дошли в сайта с любими приказки за малки и големи - "FairyAll"!
+                Идеята за сайта дойде още през 2018 година. Замислих се каква голяма роля играят съвременните технолии
+                в нашия живот и как децата още преди да могат да говорят вече имат достъп до мобилни устройства. Книгите като че ли остават на заден план. И за да не се губи
+                връзката на човека с четенето, реших да създам този сайт - място, на което можем да се докоснем до магията
+                на приказките, да се потопим в един по-спокоен свят, изпълнен със мечти и спомени. Нека покажем на децата  (а и на възрастните, които са позабравили магията на приказките), че четенето може да бъде интересно и увлекателно! Приятно четене!
+            </p>
+        </div>
     </div>
     <!-- End -->
 
     <!-- Tales section -->
     <div class="text-center justify-content-center align-items-center col-lg-6">
+        {% if request.user.is_staff %}
         <div>
-            {% if request.user.is_staff %}
             <a class="btn btn-blue m-2 text-cyan link-grey" href="{% url 'create-tale' %}">Добави приказка</a>
             <a class="btn btn-blue m-2 text-cyan link-grey" href="{% url 'create-author' %}">Добави автор</a>
-            {% endif %}
-            <a class="btn btn-blue m-2 text-cyan link-grey" href="{% url 'create-author' %}">Всички приказки</a>
         </div>
+        {% endif %}
 
         <div class="m-3 d-lg-none d-xl-block d-xl-none">
             <form class="d-flex" role="search" method="GET" action="{% url 'home' %}">
@@ -25,9 +37,14 @@
             </form>
         </div>
 
-        <div>
+        <div class="mt-5">
+            <div class="d-flex m-auto text-center justify-content-center align-items-center">
+                <h3 class="text-blue mx-5">Приказките на деня</h3>
+                <a class="btn btn-blue mx-5 m-2 text-cyan link-grey" href="{% url 'create-author' %}">Всички
+                    приказки</a>
+            </div>
             {% for tale in tales %}
-            <div class="card bg-blue mb-3 m-auto" style="max-width: 540px;">
+            <div class="card bg-blue w-100 mb-3 m-auto" style="max-width: 540px;">
                 <div class="row no-gutters">
                     <div class="col-md-4">
                         <img src="{{tale.cover.url}}" class="card-img">
@@ -39,10 +56,15 @@
                                     {{tale.title|title}}
                                 </a>
                             </h5>
+                            <a class="text-decoration-none" href="{% url 'author-profile' tale.author.id %}"
+                                class="card-text">
+                                <small class="text-grey link-cyan">
+                                    {{tale.author.name}}
+                                </small>
+                            </a>
                             <hr>
                             <p class="card-text px-1">{{tale.body|slice:"145"|safe}}...</p>
-                            <a class="text-decoration-none" href="{% url 'author-profile' tale.author.id %}"
-                                class="card-text"><small class="text-muted">{{tale.author.name}}</small></a>
+                            <a href="{% url 'tale' tale.id %}" class="btn btn-outline-cyan">ПРОЧЕТИ</a>
                         </div>
                     </div>
                 </div>
@@ -53,7 +75,7 @@
     <!-- End -->
 
     <!-- Activity section -->
-    <div class="col rounded d-md-none d-lg-block d-sm-none d-md-block d-none d-sm-block">
+    <div class="col bg-blue mx-2 rounded d-md-none d-lg-block d-sm-none d-md-block d-none d-sm-block">
         {% include 'base/recent_activity_section.html' %}
     </div>
     <!-- End -->
