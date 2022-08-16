@@ -23,7 +23,6 @@ svg{
 }
 
 .profile-pic{
-  display: block;
   border-radius: 50%;
   object-fit: cover;
   object-position: center;
@@ -112,7 +111,7 @@ svg{
 }
 
 .btn-outline-blue:hover{
-  color: var(--white-color);
+  color: var(--cyan-color);
   background-color: var(--blue-color);
 }
 

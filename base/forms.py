@@ -1,5 +1,6 @@
-from dataclasses import field
+from django import forms
 from django.forms import ModelForm
+from ckeditor.widgets import CKEditorWidget
 from django.contrib.auth.forms import UserCreationForm
 from .models import Author, Tale, User
 
@@ -14,17 +15,19 @@ class MyUserCreationForm(UserCreationForm):
 
 
 class TaleForm(ModelForm):
+    body = forms.CharField(widget=CKEditorWidget())
     class Meta:
         model = Tale
         fields = '__all__'
-        labels = {'title': 'Заглавие', 'author': 'Автор',
-                  'body': 'Съдържание', 'cover': 'Корица'}
+        labels = {'title': 'Заглавие', 'author': 'Автор', 'body': 'Съдържание', 'cover': 'Корица'}
 
 
 class AuthorForm(ModelForm):
+    bio = forms.CharField(widget=CKEditorWidget())
     class Meta:
         model = Author
         fields = '__all__'
+        labels = {'name': 'Име', 'nationality': 'Националност', 'bio': 'Биография', 'picture': 'Снимка'}
 
 
 class UserForm(ModelForm):

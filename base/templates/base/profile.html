@@ -8,17 +8,32 @@
     </div>
     <!-- End -->
 
-    <!-- User's Information -->
-    <div calss="text-center justify-content-center align-items-center col-lg-6">
-        <h2>{{user.name}}</h2>
-        <img width="350px" height="350px" src="{{user.picture.url}}" />
+    <!-- Profile section -->
+    <div class="col-lg-6">
+        <div class="text-center justify-content-center align-items-center mb-3">
+            <div class="mb-3">
+                <img class="profile-pic" width="150px" height="150px" src="{{user.picture.url}}" />
+                <h3 class="text-blue">{{user.name}}</h3>
+                <h5 class="text-grey">{{user.username}}</h5>
 
-        {% if user.is_staff %}
-        <p>Staff member</p>
-        {% endif %}
+                {% if user.is_staff %}
+                <small class="text-muted">Staff member</small>
+                {% endif %}
+            </div>
 
-        <p>{{user.bio|safe}}</p>
+            <div>
+                {% if request.user == user %}
+                <a class="btn btn-outline-blue" href="{% url 'update-user' %}">Редактиране на профил</a>
+                {% endif %}
+            </div>
+        </div>
 
+        <div calss="justify-content-left align-items-start">
+            <h5 class="text-grey">Информация</h5>
+            <p class="text-blue">{{user.bio|safe}}</p>
+        </div>
+
+        <!-- TODO: Любими приказки: ...-->
     </div>
     <!-- End -->
 

@@ -40,7 +40,7 @@
                                 </a>
                             </h5>
                             <hr>
-                            <p class="card-text">{{tale.body|slice:"145"|safe}}...</p>
+                            <p class="card-text px-1">{{tale.body|slice:"145"|safe}}...</p>
                             <a class="text-decoration-none" href="{% url 'author-profile' tale.author.id %}"
                                 class="card-text"><small class="text-muted">{{tale.author.name}}</small></a>
                         </div>
