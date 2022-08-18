@@ -19,10 +19,12 @@ urlpatterns = [
     path('create-tale/', views.create_tale, name='create-tale'),
     path('update-tale/<str:pk>/', views.update_tale, name='update-tale'),
     path('delete-tale/<str:pk>/', views.delete_tale, name='delete-tale'),
+    path('tales/', views.all_tales, name='all-tales'),
 
     path('create-author/', views.create_author, name='create-author'),
     path('update-author/<str:pk>/', views.update_author, name='update-author'),
     path('delete-author/<str:pk>/', views.delete_author, name='delete-author'),
+    path('authors/', views.all_authors, name='all-authors'),
 
 ]
 

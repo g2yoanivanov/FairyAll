@@ -86,8 +86,8 @@ def home(request):
 
 def author_profile(request, pk):
     author = Author.objects.get(id=pk)
-    authors = Author.objects.all()[0:5]
-    user_messages = Message.objects.all()[0:3]
+    authors = Author.objects.all()[0:10]
+    user_messages = Message.objects.all()[0:7]
 
     all_tales = Tale.objects.all()
     tales_count = all_tales.count()
@@ -103,6 +103,18 @@ def tale(request, pk):
 
     context = {'tale': tale, 'tales': tales}
     return render(request, 'base/tale.html', context)
+
+
+def all_tales(request):
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+
+    tales = Tale.objects.filter(
+        Q(author__name__icontains=q) |
+        Q(title__icontains=q.lower())
+    )
+
+    context={'tales': tales}
+    return render(request, 'base/all_tales.html', context)
 
 
 def user_profile(request, pk):
@@ -163,6 +175,7 @@ def delete_message(request, pk):
 
 @staff_member_required
 def create_tale(request):
+    title = 'tale-create'
     form = TaleForm()
 
     if request.method == 'POST':
@@ -174,12 +187,13 @@ def create_tale(request):
         else:
             messages.error(request, 'Неуспешно създаване на приказка')
 
-    context = {'form': form}
+    context = {'form': form, 'title': title}
     return render(request, 'base/creation-form.html', context)
 
 
 @staff_member_required
 def update_tale(request, pk):
+    title = 'tale-update'
     tale = Tale.objects.get(id=pk)
     form = TaleForm(instance=tale)
 
@@ -193,7 +207,7 @@ def update_tale(request, pk):
             # TODO: redirect to a page for the staff members
             return redirect('home')
 
-    context = {'form': form}
+    context = {'form': form, 'title': title}
     return render(request, 'base/creation-form.html', context)
 
 
@@ -214,6 +228,7 @@ def delete_tale(request, pk):
 
 @staff_member_required
 def create_author(request):
+    title = 'author-create'
     form = AuthorForm()
 
     if request.method == 'POST':
@@ -225,12 +240,13 @@ def create_author(request):
         else:
             messages.error(request, 'Неуспешно създаване на автор')
 
-    context = {'form': form}
+    context = {'form': form, 'title': title}
     return render(request, 'base/creation-form.html', context)
 
 
 @staff_member_required
 def update_author(request, pk):
+    title = 'author-update'
     author = Author.objects.get(id=pk)
     form = AuthorForm(instance=author)
 
@@ -244,8 +260,8 @@ def update_author(request, pk):
             # TODO: redirect to a page for the staff members
             return redirect('home')
 
-    context = {'form': form}
-    return render(request, 'base/author-form.html', context)
+    context = {'form': form, 'title': title}
+    return render(request, 'base/creation-form.html', context)
 
 
 @staff_member_required
@@ -261,3 +277,13 @@ def delete_author(request, pk):
 
     context = {'obj': author}
     return render(request, 'base/delete.html', context)
+
+
+def all_authors(request):
+    authors = Author.objects.all()
+    all_tales = Tale.objects.all()
+    tales_count = all_tales.count()
+
+    context={'authors': authors, 'tales_count': tales_count}
+    return render(request, 'base/all_authors.html', context)
+

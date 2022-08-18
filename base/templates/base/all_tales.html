@@ -1,0 +1,30 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="container col-md-9">
+    <div class="m-3 d-lg-none d-xl-block d-xl-none">
+        <form class="d-flex" role="search" method="GET" action="{% url 'all-tales' %}">
+            <input class="form-control" name="q" type="search" placeholder="Търсете приказки">
+            <button class="btn btn-blue text-cyan" type="submit">Търси</button>
+        </form>
+    </div>
+
+    <div class="row d-flex">
+        {% for tale in tales %}
+        <div class="col-sm-12 col-md-6 col-lg-4 my-3">
+            <div class="card bg-blue text-cyan text-center">
+                <img class="card-img-top" width="100px" height="400px" src="{{tale.cover.url}}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{tale.title|title}}</h5>
+                    <a class="card-text text-grey link-cyan text-decoration-none" href="{% url 'author-profile' tale.author.id %}"><small class="">{{tale.author.name}}</small></a>
+                    <br>
+                    <a class="btn btn-outline-cyan mt-3" href="{% url 'tale' tale.id %}">
+                        ПРОЧЕТИ
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

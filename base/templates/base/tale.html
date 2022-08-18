@@ -1,25 +1,36 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<div class="double-container">
-    <div>
-        <h2>{{tale.title}}</h2>
-        <h3>{{tale.author.name}}</h3>
+<div class="row mt-4 mx-0">
+    <div class="col-lg-9">
+        <div class="text-blue mb-5 text-center">
+            <img class="rounded" width="300px" height="300px" src="{{tale.cover.url}}" />
+            <h1 class="m-auto">{{tale.title|title}}</h1>
+        </div>
 
-        <img src="{{tale.cover.url}}">
+        <div class="p-3 border-blue rounded">
+            <h5 class="text-blue text-justify">{{tale.body|safe}}</h5>
+        </div>
 
-        <div>
-            <p>{{tale.body|safe}}</p>
-        </div> 
     </div>
 
-    <div>
-        <h3>Още от {{tale.author.name}}</h3>
+    <div class="col-lg-3 col-sm-6 text-center">
+        <h3 class="text-blue">Още от {{tale.author.name}}</h3>
         {% for t in tales %}
-            {% if t.author.name == tale.author.name and tale.title != t.title %}
-            <h4>{{t.title}}</h4>
-            <img src="{{t.cover.url}}" />
-            {% endif %}
+        {% if t.author.name == tale.author.name and t.title != tale.title %}
+        <div class="card bg-blue text-cyan text-center">
+            <img class="card-img-top" width="100px" height="300px" src="{{t.cover.url}}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{t.title|title}}</h5>
+                <a class="card-text text-grey link-cyan text-decoration-none"
+                    href="{% url 'author-profile' t.author.id %}"><small class="">{{t.author.name}}</small></a>
+                <br>
+                <a class="btn btn-outline-cyan mt-3" href="{% url 'tale' tale.id %}">
+                    ПРОЧЕТИ
+                </a>
+            </div>
+        </div>
+        {% endif %}
         {% endfor %}
     </div>
 </div>

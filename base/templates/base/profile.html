@@ -28,9 +28,14 @@
             </div>
         </div>
 
-        <div calss="justify-content-left align-items-start">
+        <div calss="justify-content-left align-items-start mb-3">
             <h5 class="text-grey">Информация</h5>
             <p class="text-blue">{{user.bio|safe}}</p>
+        </div>
+
+        <div calss="justify-content-left align-items-start mt-3">
+            <h5 class="text-grey">Любима приказка</h5>
+            <a class="text-blue link-grey text-decoration-none" href="{% url 'tale' user.favourite_tale.id %}">{{user.favourite_tale.title|title}}</a>
         </div>
 
         <!-- TODO: Любими приказки: ...-->

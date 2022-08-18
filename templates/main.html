@@ -19,11 +19,13 @@
 
     <!-- Flash messages -->
     {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
+    <div class="container d-grid text-left text-cyan bg-blue w-50 rounded mt-5">
+        <ul class="messages">
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
     {% endif %}
 
     {% block content %}

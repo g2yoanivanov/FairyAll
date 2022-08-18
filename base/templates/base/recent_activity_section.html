@@ -7,22 +7,30 @@
     </div>
     {% for message in user_messages %}
     <div class="border-blue d-block rounded m-2 p-2">
-        <small>
-            <strong>
-                <a class="link-cyan text-decoration-none text-blue"
-                    href="{% url 'user-profile' message.user.id %}">@{{message.user.username}}
-                </a>
-            </strong>
-            коментира:
-        </small>
-        <br>
-        <small>{{message.created|timesince}} ago</small>
-        <br>
-        <p class="bg-blue rounded p-2 my-2">
-            <span>
-                {{message|safe|slice:"27"}}{% if message.body|length > 20 %}...{% endif %}
-            </span>
-        </p>
+        <div class="d-flex">
+            <div class="mx-1">
+                <img class="profile-pic d-block" width="40px" height="40px" src="{{request.user.picture.url}}" />
+            </div>
+            <div>
+                <strong>
+                    <a class="link-cyan text-decoration-none text-blue"
+                        href="{% url 'user-profile' message.user.id %}">@{{message.user.username}}
+                    </a>
+                </strong>
+                <small>
+                    коментира:
+                </small>
+                <br>
+                <small>{{message.created|timesince}} ago</small>
+            </div>
+        </div>
+        <div>
+            <p class="bg-blue rounded p-2 my-2">
+                <span>
+                    {{message|safe|slice:"27"}}{% if message.body|length > 20 %}...{% endif %}
+                </span>
+            </p>
+        </div>
     </div>
     {% endfor %}
 </div>

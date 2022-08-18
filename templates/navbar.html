@@ -4,7 +4,7 @@
     <!-- Navbar for computers -->
     <nav class="navbar bg-dark text-light d-md-none d-lg-block d-sm-none d-md-block d-none d-sm-block">
         <div class="container-fluid">
-            <form class="d-flex" role="search" method="GET" action="{% url 'home' %}">
+            <form class="d-flex" role="search" method="GET" action="{% url 'all-tales' %}">
                 <input class="form-control me-3" name="q" type="search" placeholder="Търсете приказки">
                 <button class="btn btn-outline-cyan" type="submit">Търси</button>
             </form>
@@ -65,12 +65,17 @@
             <div class="dropdown">
                 <button class="btn btn-no-border btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    <svg class="svg-cyan" version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
+                    <svg class="svg-cyan" version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                        viewBox="0 0 32 32">
                         <title></title>
                         <path d="M16 21l-13-13h-3l16 16 16-16h-3l-13 13z"></path>
                     </svg>
                 </button>
                 <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item text-cyan" href="{% url 'all-authors' %}">Автори</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item text-cyan " href="{% url 'forum' %}">Форум</a>
+                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item text-cyan" href="{% url 'update-user' %}">Редактиране на профил</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item text-cyan" href="{% url 'logout' %}">Излезте от профила си</a>

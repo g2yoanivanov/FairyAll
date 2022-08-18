@@ -5,117 +5,162 @@
   --white-color: #eaebed;
 }
 
-body{
+body {
   background-color: var(--cyan-color) !important;
   color: var(--white-color) !important;
 }
 
-svg{
+svg {
   fill: var(--cyan-color);
 }
 
-.title:hover{
+.title:hover {
   color: var(--grey-color);
 }
 
-.btn-no-border{
+.btn-no-border {
   border: none;
 }
 
-.profile-pic{
+.profile-pic {
   border-radius: 50%;
   object-fit: cover;
   object-position: center;
 }
 
-.border-radius-5{
+.vertical-center {
+  min-height: 90%;
+  min-height: 90vh;
+
+  display: flex;
+  align-items: center;
+}
+
+.card-img-top-custom {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.form_group input,
+.form_group textarea,
+.form_group select {
+  background: transparent;
+  border: 1px solid var(--blue-color);
+  padding: 0.7rem;
+  border-radius: 3px;
+  width: 100%;
+  color: var(--white-color);
+  font-weight: 400;
+  outline: none;
+}
+
+.form_group input:focus,
+.form_group textarea:focus {
+  border-color: var(--cyan-color);
+}
+
+.form_group select {
+  color: var(--gray-color);
+  font-weight: 400;
+}
+
+.form_group select option {
+  background-color: var(--cyan-color);
+  color: var(--blue-color);
+  padding: 0 10rem;
+  border-radius: 5px;
+  text-transform: capitalize;
+}
+
+.border-radius-5 {
   border-radius: 5px;
 }
 
-.dropdown-menu{
+.dropdown-menu {
   z-index: 100;
   position: absolute;
   top: 3rem;
   right: 0.3rem;
   background: var(--blue-color);
   border-radius: 10px;
-  box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.15); 
+  box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.15);
   overflow: hidden;
   display: none;
 }
 
-.dropdown-item:hover{
+.dropdown-item:hover {
   border-radius: 10px;
   background: var(--cyan-color);
   color: var(--blue-color);
 }
 
- /*Buttons */
+/*Buttons */
 
- /* --grey-- */
- .btn-grey{
+/* --grey-- */
+.btn-grey {
   color: var(--white-color);
   background-color: var(--grey-color);
 }
 
-.btn-outline-grey{
+.btn-outline-grey {
   color: var(--grey-color);
   background-color: none;
   border-color: var(--grey-color);
 }
 
-.btn-outline-grey:hover{
+.btn-outline-grey:hover {
   color: var(--white-color);
   background-color: var(--grey-color);
 }
 
 /* --cyan-- */
-.btn-cyan{
+.btn-cyan {
   color: var(--white-color);
   background-color: var(--cyan-color);
 }
 
-.btn-outline-cyan{
+.btn-outline-cyan {
   color: var(--cyan-color);
   background-color: none;
   border-color: var(--cyan-color);
 }
 
-.btn-outline-cyan:hover{
+.btn-outline-cyan:hover {
   color: var(--white-color);
   background-color: var(--cyan-color);
 }
 
 /* --blue-- */
-.btn-blue{
+.btn-blue {
   color: var(--white-color);
   background-color: var(--blue-color);
 }
 
-.btn-outline-blue{
+.btn-outline-blue {
   color: var(--blue-color);
   background-color: none;
   border-color: var(--blue-color);
 }
 
-.btn-outline-blue:hover{
+.btn-outline-blue:hover {
   color: var(--cyan-color);
   background-color: var(--blue-color);
 }
 
 /* --white-- */
-.btn-white{
+.btn-white {
   color: var(--grey-color);
   background-color: var(--white-color);
 }
 
-.btn-outline-white{
+.btn-outline-white {
   color: var(--grey-color);
   background-color: none;
   border-color: var(--white-color);
 }
 
-.btn-outline-white:hover{
+.btn-outline-white:hover {
   color: var(--grey-color);
   background-color: var(--white-color);
 }
@@ -124,72 +169,69 @@ svg{
 
 /* Texts */
 
-.text-cyan{
+.text-cyan {
   color: var(--cyan-color);
 }
 
-.text-white{
+.text-white {
   color: var(--white-color);
 }
 
-.text-blue{
+.text-blue {
   color: var(--blue-color);
 }
 
-.text-grey{
+.text-grey {
   color: var(--grey-color);
 }
 
-.link-grey:hover{
+.link-grey:hover {
   color: var(--grey-color);
 }
 
-.link-blue:hover{
+.link-blue:hover {
   color: var(--blue-color);
 }
 
-.link-cyan:hover{
+.link-cyan:hover {
   color: var(--cyan-color);
 }
 
-.link-white:hover{
+.link-white:hover {
   color: var(--white-color);
 }
 
 /* Background colors */
-.bg-cyan{
+.bg-cyan {
   background-color: var(--cyan-color);
 }
 
-.bg-blue{
+.bg-blue {
   background-color: var(--blue-color);
 }
 
-.bg-grey{
+.bg-grey {
   background-color: var(--grey-color);
 }
 
-.bg-white{
+.bg-white {
   background-color: var(--white-color);
 }
 
 /* Borders */
 
-.border-cyan{
+.border-cyan {
   border: 1px solid var(--cyan-color);
 }
 
-.border-white{
+.border-white {
   border: 1px solid var(--white-color);
 }
 
-.border-blue{
+.border-blue {
   border: 1px solid var(--blue-color);
 }
 
-.border-grey{
+.border-grey {
   border: 1px solid var(--grey-color);
 }
-
-
-

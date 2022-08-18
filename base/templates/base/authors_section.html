@@ -2,7 +2,7 @@
     <h2>Автори</h2>
     <p>приказки: <span>{{tales_count}}</span></p>
 </div>
-<div class="bg-grey rounded-top py-3 rounded-bottom">
+<div class="bg-grey rounded-top py-3 mb-2 rounded-bottom">
     {% for a in authors %}
     {% if a.name != "Български Народни Приказки" %}
     <div class="row align-items-center justify-content-center text-left py-2">
@@ -25,6 +25,6 @@
     {% endfor %}
 
     <div calss="text-center">
-        <a class="link-blue btn btn-cyan text-blue text-decoration-underlined" href="">ОЩЕ</a>
+        <a class="link-blue btn btn-cyan text-blue text-decoration-underlined" href="{% url 'all-authors' %}">ОЩЕ</a>
     </div>
 </div>

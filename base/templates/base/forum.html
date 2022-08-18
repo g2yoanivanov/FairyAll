@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="container d-grid mt-4 justify-content-center align-items-center">
-    <div class="text-center mx-2">
+    <div class="text-center col-7 justify-content-center align-items-center m-auto">
         <h2 class="text-blue">ФОРУМ</h2>
         <h5 class="text-grey  mb-0">Споделете с останилите мнението си по различни въпроси</h5>
         <small class="text-grey mt-0">(показват се последните 100 съобщения)</small>
@@ -17,8 +17,7 @@
 
     <div class="row justify-content-center align-items-center">
         {% for message in user_messages %}
-        <div class="bg-grey border-blue col-6 col-lg-7 rounded m-2 p-2">
-
+        <div class="bg-grey border-blue col-lg-7 col-sm-5 rounded m-2 p-2">
             {% if request.user == message.user %}
             <div class="position-relative">
                 <a href="{% url 'delete-message' message.id %}">
@@ -36,16 +35,16 @@
             {% endif %}
 
             <div class="d-flex">
-                <div>
+                <div class="mx-1">
                     <img class="profile-pic d-block" width="40px" height="40px" src="{{request.user.picture.url}}" />
                 </div>
                 <div>
+                    <strong>
+                        <a class="link-cyan text-decoration-none text-blue"
+                            href="{% url 'user-profile' message.user.id %}">@{{message.user.username}}
+                        </a>
+                    </strong>
                     <small>
-                        <strong>
-                            <a class="link-cyan text-decoration-none text-blue"
-                                href="{% url 'user-profile' message.user.id %}">@{{message.user.username}}
-                            </a>
-                        </strong>
                         коментира:
                     </small>
                     <br>

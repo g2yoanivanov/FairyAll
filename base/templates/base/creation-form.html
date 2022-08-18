@@ -1,21 +1,51 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<div>
-    <form action="" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-
-        {{form.media}}
-        {{form.as_p}}
-        <!-- {% for field in form %}
-        <div>
-            <label for="profile_pic">{{field.label}}</label>
-            {{field}}
+<div class="container-fluid col-lg-6 my-3 col-sm-10 justify-content-center align-items-center">
+    <div class="d-grid">
+        <div class="d-flex bg-blue pt-1 rounded-top">
+            <a class="mx-3" href="{{request.META.HTTP_REFERER}}">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 32 32">
+                    <title>arrow-left</title>
+                    <path
+                        d="M13.723 2.286l-13.723 13.714 13.719 13.714 1.616-1.611-10.96-10.96h27.625v-2.286h-27.625l10.965-10.965-1.616-1.607z">
+                    </path>
+                </svg>
+            </a>
+            {% if title == 'tale-create' %}
+            <h4>Добавете приказка</h4>
+            {% elif title == 'tale-update' %}
+            <h4>Редактирайте приказка</h4>
+            {% elif title == 'author-create' %}
+            <h4>Добавете автор</h4>
+            {% elif title == 'author-update' %}
+            <h4>Редактирайте автор</h4>
+            {% else %}
+            <h4>Редактирайте продила си</h4>
+            {% endif %}
         </div>
-        {% endfor %} -->
 
-        <a href="{{request.META.HTTP_REFERER}}">Cancel</a>
-        <button type="submit">Submit</button>
-    </form>
+        <div class="rounded-bottom">
+            <form class="form-control bg-grey text-cyan" action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <!-- {{form.media}}
+                {{form.as_p}} -->
+                {% for field in form %}
+                <div class="d-grid my-4 h-75 form_group">
+                    <label for="profile_pic py-3">{{field.label}}</label>
+                    {{field}}
+                </div>
+                {% endfor %}
+
+                <a class="btn btn-outline-blue" href="{{request.META.HTTP_REFERER}}">Отказ</a>
+                {% if title == 'tale-create' or title == 'author-create' %}
+                <button class="btn btn-blue text-cyan border-cyan" type="submit">Създай</button>
+                {% else %}
+                <button class="btn btn-blue text-cyan border-cyan" type="submit">Редактирай</button>
+                {% endif %}
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}

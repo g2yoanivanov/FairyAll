@@ -3,38 +3,62 @@
 {% block content %}
 {% if page == 'login' %}
 
-<div>
-    <form method="POST" action="">
-        {% csrf_token %}
+<div class="container-fluid vertical-center col-8 justify-content-center align-items-center">
+    <div class="d-grid bg-blue rounded">
+        <div>
+            <h2 class="text-center text-cyan">Вход</h2>
+            <form class="form-control bg-grey" method="POST" action="">
+                {% csrf_token %}
 
-        <label>Email:</label>
-        <input name="email" type="email" placeholder="Пример: example@abv.bg" />
+                <div class="form_group">
+                    <label class="text-cyan">Email:</label>
+                    <input name="email" type="email" />
+                </div>
+                <br>
+                <div class="form_group">
+                    <label class="text-cyan">Парола:</label>
+                    <input name="password" type="password" />
+                </div>
 
-        <label>Парола:</label>
-        <input name="password" type="password" />
+                <div class="text-center my-3">
+                    <button class="btn btn-outline-blue" type="submit">Вход</button>
+                </div>
+            </form>
+        </div>
 
-        <button type="submit">Влез</button>
-    </form>
-
-    <p>Нямате профил?</p>
-    <a href="{% url 'register' %}">Регистрация</a>
+        <div class="text-center my-3 py-0">
+            <p class="text-cyan">Нямате профил?</p>
+            <a class="text-decoration-none text-grey link-cyan" href="{% url 'register' %}">Регистрирайте се</a>
+        </div>
+    </div>
 </div>
 
 {% else %}
-<form class="form" action="" method="POST">
-    {% csrf_token %}
-
-    {% for field in form %}
-    <div>
-        <label>{{field.label}}</label>
-        {{field}}
+<div class="container-fluid vertical-center col-8 justify-content-center align-items-center">
+    <div class="d-grid bg-blue rounded">
+        <div>
+            <h2 class="text-center text-cyan">Регистрация</h2>
+            <form class="form-control bg-grey" method="POST" action="">
+                {% csrf_token %}
+    
+                {% for field in form %}
+                <div class="form_group">
+                    <label class="text-cyan">{{field.label}}</label>
+                    {{field}}
+                </div>
+                {% endfor %}
+    
+                <div class="text-center my-3">
+                    <button class="btn btn-outline-blue" type="submit">Регистрация</button>
+                </div>
+            </form>
+        </div>
+    
+        <div class="text-center my-3 py-0">
+            <p class="text-cyan">Вече имате профил?</p>
+            <a class="text-decoration-none text-grey link-cyan" href="{% url 'login' %}">Влез в него</a>
+        </div>
     </div>
-    {% endfor %}
-
-    <button type="submit">Регистрирай се</button>
-</form>
-
-<p>Вече имате профил?</p>
-<a href="{% url 'login' %}">Влезте в него</a>
+</div>
 {% endif %}
 {% endblock %}

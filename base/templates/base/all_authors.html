@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="container vertical-center col-lg-8 col-md-6 justify-content-center align-items-center">
+    <div class="d-grid">
+        <div class="bg-blue text-center rounded-top">
+            <h2 class="text-cyan">Автори</h2>
+            <p><a class="text-decoration-none text-cyan link-grey" href="{% url 'all-tales' %}">приказки</a>: <span>{{tales_count}}</span></p>
+        </div>
+        <div class="bg-grey rounded-bottom">
+            {% for author in authors %}
+            {% if author.name != "Български Народни Приказки" %}
+            <div class="row align-items-center justify-content-center text-left m-3">
+                <div class="col-8">
+                    <h4>
+                        <a class="text-blue link-cyan text-decoration-none" href="{% url 'author-profile' author.id %}">
+                            {{author.name}}
+                        </a>
+                    </h4>
+                </div>
+
+                <div class="col-3 text-center mx-2">
+                    <h4 class="border-radius-5 bg-blue text-cyan">
+                        {{author.tale_set.all.count}}
+                    </h4>
+                </div>
+                
+            </div>
+            <hr class="mx-3">
+            
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

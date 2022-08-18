@@ -4,18 +4,6 @@ from django.contrib.auth.models import AbstractUser
 from ckeditor.fields import RichTextField
 
 
-class User(AbstractUser):
-    name = models.CharField(max_length=200, null=True)
-    email = models.EmailField(unique=True, null=True)
-    bio = models.TextField(null=True)
-    picture = models.ImageField(null=True, default="avatar.svg")
-
-    # favourite_tale
-
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
-
-
 class Country(models.Model):
     name = models.CharField(max_length=128)
 
@@ -48,6 +36,18 @@ class Tale(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class User(AbstractUser):
+    name = models.CharField(max_length=200, null=True)
+    email = models.EmailField(unique=True, null=True)
+    bio = RichTextField(null=True)
+    picture = models.ImageField(null=True, default="avatar.svg")
+
+    favourite_tale = models.ForeignKey(Tale, on_delete=models.CASCADE, null=True, blank=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
 
 
 class Message(models.Model):
