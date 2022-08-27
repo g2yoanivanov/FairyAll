@@ -120,7 +120,7 @@ def all_tales(request):
 def user_profile(request, pk):
     user = User.objects.get(id=pk)
     user_messages = user.message_set.all()[0:3]
-    authors = Author.objects.all()
+    authors = Author.objects.all()[0:5]
 
     all_tales = Tale.objects.all()
     tales_count = all_tales.count()
