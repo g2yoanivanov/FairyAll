@@ -99,7 +99,7 @@ def author_profile(request, pk):
 
 def tale(request, pk):
     tale = Tale.objects.get(id=pk)
-    tales = Tale.objects.all()[0:7]
+    tales = Tale.objects.all()[0:6]
 
     context = {'tale': tale, 'tales': tales}
     return render(request, 'base/tale.html', context)

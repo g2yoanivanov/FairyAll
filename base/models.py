@@ -32,7 +32,7 @@ class Tale(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ['author', '-created']
+        ordering = ['author', 'created']
 
     def __str__(self):
         return self.title

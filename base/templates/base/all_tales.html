@@ -13,7 +13,11 @@
             <div class="card bg-blue text-cyan text-center">
                 <img class="card-img-top" width="100px" height="400px" src="{{tale.cover.url}}" alt="Card image cap" />
                 <div class="card-body position-relative">
+                    {% if tale.title|length > 26 %}
+                    <h5 class="card-title h6">{{tale.title|title}}</h5>
+                    {% else %}
                     <h5 class="card-title">{{tale.title|title}}</h5>
+                    {% endif %}
                     <a class="card-text text-grey link-cyan text-decoration-none"
                         href="{% url 'author-profile' tale.author.id %}"><small
                             class="">{{tale.author.name}}</small></a>
