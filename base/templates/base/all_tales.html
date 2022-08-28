@@ -13,7 +13,7 @@
             <div class="card bg-blue text-cyan text-center">
                 <img class="card-img-top" width="100px" height="400px" src="{{tale.cover.url}}" alt="Card image cap" />
                 <div class="card-body position-relative">
-                    {% if tale.title|length > 26 %}
+                    {% if tale.title|length > 23 %}
                     <h5 class="card-title h6">{{tale.title|title}}</h5>
                     {% else %}
                     <h5 class="card-title">{{tale.title|title}}</h5>
@@ -28,8 +28,8 @@
 
                     {% if request.user.is_staff %}
                     <a href="{% url 'update-tale' tale.id %}">
-                        <div class="position-absolute bottom-0 pb-1 px-1 end-0">
-                            <svg enable-background="new 0 0 24 24" height="25" viewBox="0 0 24 24" width="25"
+                        <div class="position-absolute top-0 pt-1 px-1 start-0">
+                            <svg enable-background="new 0 0 24 24" height="23" viewBox="0 0 23 23" width="23"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <title>edit</title>
                                 <g>

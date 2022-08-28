@@ -6,6 +6,7 @@
         <div class="text-blue mb-5 text-center">
             <img class="rounded" width="300px" height="300px" src="{{tale.cover.url}}" />
             <h1 class="m-auto">{{tale.title|title}}</h1>
+            <h3 class="m-auto"><a class="text-decoration-none text-grey link-blue" href="{% url 'author-profile' tale.author.id %}">{{tale.author.name}}</a></h3>
         </div>
 
         <div class="p-3 border-blue rounded">
@@ -17,7 +18,7 @@
     <div class="col-lg-3 col-sm-6 text-center">
         <h3 class="text-blue">Още от {{tale.author.name}}</h3>
         {% for t in tales %}
-        {% if t.author.name == tale.author.name and t.title != tale.title %}
+        {% if t.title != tale.title %}
         <div class="card bg-blue text-cyan text-center mb-5">
             <img class="card-img-top" width="100px" height="300px" src="{{t.cover.url}}" alt="Card image cap">
             <div class="card-body">

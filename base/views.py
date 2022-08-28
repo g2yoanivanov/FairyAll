@@ -87,19 +87,19 @@ def home(request):
 def author_profile(request, pk):
     author = Author.objects.get(id=pk)
     authors = Author.objects.all()[0:10]
-    user_messages = Message.objects.all()[0:7]
+    author_tales = Tale.objects.filter(Q(author__name__contains=author))
 
     all_tales = Tale.objects.all()
     tales_count = all_tales.count()
 
     context = {'author': author, 'authors': authors,
-               'user_messages': user_messages, 'tales_count': tales_count}
+               'author_tales': author_tales, 'tales_count': tales_count}
     return render(request, 'base/author.html', context)
 
 
 def tale(request, pk):
     tale = Tale.objects.get(id=pk)
-    tales = Tale.objects.all()[0:6]
+    tales = Tale.objects.filter(Q(author__name__contains=tale.author))[0:3]
 
     context = {'tale': tale, 'tales': tales}
     return render(request, 'base/tale.html', context)
