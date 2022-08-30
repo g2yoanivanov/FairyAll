@@ -9,6 +9,7 @@ class Country(models.Model):
 
     class Meta:
         verbose_name_plural = 'Countries'
+        ordering = ['name']
 
     def __str__(self):
         return self.name
@@ -19,6 +20,9 @@ class Author(models.Model):
     nationality = models.ForeignKey(Country, on_delete=models.CASCADE)
     bio = RichTextField()
     picture = models.ImageField(null=True, default='picture.svg')
+
+    class Meta:
+        ordering = ['name']
 
     def __str__(self):
         return self.name
@@ -44,7 +48,8 @@ class User(AbstractUser):
     bio = RichTextField(null=True)
     picture = models.ImageField(null=True, default="avatar.svg")
 
-    favourite_tale = models.ForeignKey(Tale, on_delete=models.CASCADE, null=True, blank=True)
+    favourite_tale = models.ForeignKey(
+        Tale, on_delete=models.CASCADE, null=True, blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

@@ -73,7 +73,7 @@ def home(request):
         Q(title__icontains=q.lower())
     )[0:3]
 
-    authors = Author.objects.all()[0:4]
+    authors = Author.objects.all()[0:5]
     user_messages = Message.objects.all()[0:7]
 
     all_tales = Tale.objects.all()
@@ -86,7 +86,7 @@ def home(request):
 
 def author_profile(request, pk):
     author = Author.objects.get(id=pk)
-    authors = Author.objects.all()[0:10]
+    authors = Author.objects.all()[0:5]
     author_tales = Tale.objects.filter(Q(author__name__contains=author))
 
     all_tales = Tale.objects.all()
