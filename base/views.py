@@ -1,4 +1,3 @@
-from email import contentmanager, message
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
@@ -286,4 +285,3 @@ def all_authors(request):
 
     context={'authors': authors, 'tales_count': tales_count}
     return render(request, 'base/all_authors.html', context)
-

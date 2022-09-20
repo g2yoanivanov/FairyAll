@@ -25,6 +25,5 @@ urlpatterns = [
     path('update-author/<str:pk>/', views.update_author, name='update-author'),
     path('delete-author/<str:pk>/', views.delete_author, name='delete-author'),
     path('authors/', views.all_authors, name='all-authors'),
-
 ]
 
