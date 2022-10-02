@@ -7,6 +7,7 @@ from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
 from .forms import MyUserCreationForm, AuthorForm, TaleForm, UserForm
 from .models import User, Country, Author, Tale, Message
+import datetime, random
 
 
 def login_page(request):
@@ -67,18 +68,21 @@ def register_page(request):
 def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
 
-    tales = Tale.objects.filter(
-        Q(author__name__icontains=q) |
-        Q(title__icontains=q.lower())
-    )[0:3]
+    all_tales = Tale.objects.all()
+    tales_count = all_tales.count()
+
+    x = datetime.datetime.today().strftime("%Y:%m:%d")
+    random.seed(x)
+    random1, random2, random3 = random.sample(range(1, tales_count-1), 3)
+
+    tale1 = Tale.objects.get(id=random1)
+    tale2 = Tale.objects.get(id=random2)
+    tale3 = Tale.objects.get(id=random3)
 
     authors = Author.objects.all()[0:5]
     user_messages = Message.objects.all()[0:7]
 
-    all_tales = Tale.objects.all()
-    tales_count = all_tales.count()
-
-    context = {'tales': tales, 'authors': authors,
+    context = {'tale1': tale1, 'tale2': tale2, 'tale3': tale3, 'authors': authors,
                'user_messages': user_messages, 'tales_count': tales_count}
     return render(request, 'base/home.html', context)
 
@@ -151,6 +155,8 @@ def forum(request):
             user=request.user,
             body=request.POST.get('body')
         )
+        if message.body == "":
+            message.delete()
         return redirect('forum')
 
     context = {'user_messages': user_messages}

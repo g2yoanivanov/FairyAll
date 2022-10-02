@@ -32,33 +32,84 @@
                 <a class="btn btn-blue mx-5 m-2 text-cyan link-grey" href="{% url 'all-tales' %}">Всички
                     приказки</a>
             </div>
-            {% for tale in tales %}
+            <!--Tale of the day #1-->
             <div class="card bg-blue mb-3 m-auto" style="max-width: 540px;">
                 <div class="row no-gutters">
                     <div class="col-md-4">
-                        <img src="{{tale.cover.url}}" class="card-img card-img-top-custom">
+                        <img src="{{tale1.cover.url}}" class="card-img card-img-top-custom">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="pt-2">
-                                <a class="text-decoration-none text-cyan link-grey" href="{% url 'tale' tale.id %}">
-                                    {{tale.title|title}}
+                                <a class="text-decoration-none text-cyan link-grey" href="{% url 'tale' tale1.id %}">
+                                    {{tale1.title|title}}
                                 </a>
                             </h5>
-                            <a class="text-decoration-none" href="{% url 'author-profile' tale.author.id %}"
+                            <a class="text-decoration-none" href="{% url 'author-profile' tale1.author.id %}"
                                 class="card-text">
                                 <small class="text-grey link-cyan">
-                                    {{tale.author.name}}
+                                    {{tale1.author.name}}
                                 </small>
                             </a>
                             <hr>
-                            <p class="card-text px-1">{{tale.body|slice:"145"|safe}}...</p>
-                            <a href="{% url 'tale' tale.id %}" class="btn btn-outline-cyan">ПРОЧЕТИ</a>
+                            <p class="card-text px-1">{{tale1.body|slice:"145"|safe}}...</p>
+                            <a href="{% url 'tale' tale1.id %}" class="btn btn-outline-cyan">ПРОЧЕТИ</a>
                         </div>
                     </div>
                 </div>
             </div>
-            {% endfor %}
+            <!--Tale of the day #2-->
+            <div class="card bg-blue mb-3 m-auto" style="max-width: 540px;">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="{{tale2.cover.url}}" class="card-img card-img-top-custom">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="pt-2">
+                                <a class="text-decoration-none text-cyan link-grey" href="{% url 'tale' tale2.id %}">
+                                    {{tale2.title|title}}
+                                </a>
+                            </h5>
+                            <a class="text-decoration-none" href="{% url 'author-profile' tale2.author.id %}"
+                                class="card-text">
+                                <small class="text-grey link-cyan">
+                                    {{tale2.author.name}}
+                                </small>
+                            </a>
+                            <hr>
+                            <p class="card-text px-1">{{tale2.body|slice:"145"|safe}}...</p>
+                            <a href="{% url 'tale' tale2.id %}" class="btn btn-outline-cyan">ПРОЧЕТИ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Tale of the day #3-->
+            <div class="card bg-blue mb-3 m-auto" style="max-width: 540px;">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="{{tale3.cover.url}}" class="card-img card-img-top-custom">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="pt-2">
+                                <a class="text-decoration-none text-cyan link-grey" href="{% url 'tale' tale3.id %}">
+                                    {{tale3.title|title}}
+                                </a>
+                            </h5>
+                            <a class="text-decoration-none" href="{% url 'author-profile' tale3.author.id %}"
+                                class="card-text">
+                                <small class="text-grey link-cyan">
+                                    {{tale3.author.name}}
+                                </small>
+                            </a>
+                            <hr>
+                            <p class="card-text px-1">{{tale3.body|slice:"145"|safe}}...</p>
+                            <a href="{% url 'tale' tale3.id %}" class="btn btn-outline-cyan">ПРОЧЕТИ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- End -->
